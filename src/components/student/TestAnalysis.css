@@ -1,0 +1,319 @@
+.test-analysis-container {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.test-analysis-header {
+  margin-bottom: 3rem;
+}
+
+.test-analysis-header h2 {
+  color: #1e293b;
+  margin-bottom: 0.5rem;
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.test-analysis-header p {
+  color: #64748b;
+  font-size: 1.1rem;
+}
+
+/* Upload Area Styles */
+.upload-area {
+  background: white;
+  border: 2px dashed #e2e8f0;
+  border-radius: 12px;
+  padding: 3rem 2rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-bottom: 3rem;
+}
+
+.upload-area:hover, .upload-area.drag-over {
+  border-color: #667eea;
+  background: #f8fafc;
+  transform: translateY(-2px);
+}
+
+.upload-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.upload-area h3 {
+  color: #1e293b;
+  margin-bottom: 0.5rem;
+  font-size: 1.5rem;
+}
+
+.upload-area p {
+  color: #64748b;
+  margin-bottom: 1rem;
+}
+
+.file-types {
+  font-size: 0.9rem !important;
+  color: #94a3b8 !important;
+}
+
+.upload-btn {
+  background: #667eea;
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 1rem;
+}
+
+.upload-btn:hover {
+  background: #5a67d8;
+  transform: translateY(-1px);
+}
+
+.upload-btn:disabled, .upload-btn.uploading {
+  background: #cbd5e0;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Test Analyses Section */
+.test-analyses-section {
+  margin-top: 3rem;
+}
+
+.test-analyses-section h3 {
+  color: #1e293b;
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.loading-state {
+  text-align: center;
+  padding: 2rem;
+  color: #64748b;
+  font-size: 1.1rem;
+}
+
+.empty-state {
+  background: #f8fafc;
+  padding: 3rem 2rem;
+  border-radius: 12px;
+  text-align: center;
+  color: #64748b;
+}
+
+/* Test Analysis Cards */
+.test-analyses-list {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.test-analysis-card {
+  background: white;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  padding: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  transition: all 0.3s ease;
+}
+
+.test-analysis-card:hover {
+  border-color: #667eea;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.1);
+  transform: translateY(-1px);
+}
+
+.test-info {
+  flex: 1;
+}
+
+.test-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.test-header h4 {
+  color: #1e293b;
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.status-badge {
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.status-pending {
+  background: #fef3cd;
+  color: #92400e;
+}
+
+.status-scheduled {
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+.status-completed {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.test-meta {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+  color: #64748b;
+}
+
+.test-meta span {
+  background: #f1f5f9;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+}
+
+.test-remarks {
+  margin-top: 1rem;
+  padding: 1rem;
+  background: #f8fafc;
+  border-left: 4px solid #667eea;
+  border-radius: 4px;
+}
+
+.test-remarks strong {
+  color: #1e293b;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.test-remarks p {
+  color: #64748b;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.test-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: flex-end;
+}
+
+.view-btn {
+  background: #667eea;
+  color: white;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.view-btn:hover {
+  background: #5a67d8;
+  transform: translateY(-1px);
+}
+
+.pending-note {
+  font-size: 0.8rem;
+  color: #64748b;
+  font-style: italic;
+}
+
+/* Enrollment Required Styles */
+.enrollment-required {
+  text-align: center;
+  padding: 2rem;
+}
+
+.enrollment-prompt {
+  background: white;
+  border-radius: 16px;
+  padding: 3rem 2rem;
+  max-width: 500px;
+  margin: 2rem auto;
+  border: 1px solid #e2e8f0;
+}
+
+.enrollment-icon {
+  font-size: 4rem;
+  margin-bottom: 1.5rem;
+}
+
+.enrollment-prompt h3 {
+  color: #1e293b;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+}
+
+.enrollment-prompt p {
+  color: #64748b;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+.enroll-btn {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.enroll-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.3);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .test-analysis-container {
+    padding: 1rem;
+  }
+  
+  .upload-area {
+    padding: 2rem 1rem;
+  }
+  
+  .test-analysis-card {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .test-actions {
+    align-items: stretch;
+    width: 100%;
+  }
+  
+  .test-meta {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .test-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+}
