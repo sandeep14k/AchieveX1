@@ -36,99 +36,129 @@ const UserTypes = ({ setActiveSection }) => {
   const userTypes = [
     {
       id: 'not-enrolled',
-      title: 'Not Enrolled Student',
+      title: 'New Student',
+      subtitle: 'Start Your JEE Journey',
       icon: '🎯',
-      price: '₹19 First Session',
+      price: '₹19',
+      priceLabel: 'First Session',
       features: [
-        'Book first mentorship session for just ₹19',
-        'Future sessions at ₹49 each',
-        'Cannot see/select specific mentors',
-        'Can explore and enroll in subscription plans'
+        'Experience our mentorship approach',
+        'Personalized weakness analysis',  
+        'Strategic study plan overview',
+        'Direct interaction with IITian mentor'
       ],
-      cta: 'Book ₹19 Session',
-      highlight: false
+      cta: 'Book Trial Session',
+      highlight: false,
+      popular: false
     },
     {
       id: 'enrolled',
       title: 'Enrolled Student',
+      subtitle: 'Full Ecosystem Access',
       icon: '🚀',
-      price: 'Full Ecosystem Access',
+      price: 'Complete',
+      priceLabel: 'Mentorship Program',
       features: [
-        'Weekly planner with daily to-do tasks',
-        '1:1 chat with mentor + session scheduling',
-        'Test analysis sessions (auto-scheduled)',
-        'Countdown timer for JEE Mains & Advanced',
-        'Target rank setting for personalized strategy',
-        'Progress tracking and analytics'
+        'Weekly personalized study planner',
+        'Daily task tracking & accountability',
+        'Unlimited mentor chat & sessions',
+        'Advanced test analysis & feedback',
+        'JEE countdown with target tracking',
+        'Progress analytics & insights'
       ],
       cta: 'View Plans',
-      highlight: true
+      highlight: true,
+      popular: true
     },
     {
       id: 'mentor',
-      title: 'Mentor (IITian)',
+      title: 'IIT Mentor',
+      subtitle: 'Shape Future Engineers',
       icon: '👨‍🏫',
-      price: 'Become a Mentor',
+      price: 'Earn',
+      priceLabel: 'While Teaching',
       features: [
-        'View all enrolled students and details',
-        'Create weekly planners and assign tasks',
-        'Conduct test analysis with written feedback',
-        'Chat with students, schedule sessions',
-        'Track student progress, goals, consistency',
-        'Earn while helping JEE aspirants'
+        'Guide JEE aspirants to success',
+        'Create personalized study plans',
+        'Conduct detailed test analysis',
+        'Build mentoring experience',
+        'Flexible scheduling options',
+        'Competitive compensation'
       ],
       cta: 'Apply as Mentor',
-      highlight: false
+      highlight: false,
+      popular: false
     }
   ];
 
   return (
-    <section className="user-types" data-testid="user-types-section">
-      <div className="user-types-container">
-        <div className="section-header">
-          <h2>Who Can Join AchieveX?</h2>
-          <p>Choose your role and get started with personalized JEE mentorship</p>
+    <section className="user-types-modern" data-testid="user-types-section">
+      <div className="user-types-container-modern">
+        
+        {/* Header Section */}
+        <div className="section-header-modern">
+          <h2>Choose Your Path to Success</h2>
+          <p>Select your journey and unlock India's most effective JEE mentorship platform</p>
         </div>
         
-        <div className="user-types-grid">
+        {/* User Type Cards */}
+        <div className="user-types-grid-modern">
           {userTypes.map(userType => (
             <div 
               key={userType.id} 
-              className={`user-type-card ${userType.highlight ? 'highlight' : ''}`}
+              className={`user-type-card-modern ${userType.highlight ? 'highlighted' : ''} ${userType.popular ? 'popular' : ''}`}
               data-testid={`user-type-${userType.id}`}
             >
-              <div className="user-type-header">
-                <div className="user-type-icon">{userType.icon}</div>
-                <h3>{userType.title}</h3>
-                <p className="user-type-price">{userType.price}</p>
+              {userType.popular && (
+                <div className="popular-badge">Most Popular</div>
+              )}
+              
+              <div className="card-header-modern">
+                <div className="icon-container-modern">
+                  <span className="user-type-icon-modern">{userType.icon}</span>
+                </div>
+                <h3 className="card-title-modern">{userType.title}</h3>
+                <p className="card-subtitle-modern">{userType.subtitle}</p>
               </div>
               
-              <div className="user-type-features">
-                {userType.features.map((feature, index) => (
-                  <div key={index} className="feature-item">
-                    <span className="checkmark">✓</span>
-                    <span>{feature}</span>
-                  </div>
-                ))}
+              <div className="pricing-section-modern">
+                <div className="price-display-modern">
+                  <span className="price-main-modern">{userType.price}</span>
+                  <span className="price-label-modern">{userType.priceLabel}</span>
+                </div>
               </div>
               
-              <button 
-                className={`user-type-btn ${userType.highlight ? 'btn-primary' : 'btn-secondary'}`}
-                onClick={() => handleButtonClick(userType.id)}
-                data-testid={`${userType.id}-btn`}
-              >
-                {userType.cta}
-              </button>
+              <div className="features-section-modern">
+                <ul className="features-list-modern">
+                  {userType.features.map((feature, index) => (
+                    <li key={index} className="feature-item-modern">
+                      <span className="checkmark-modern">✓</span>
+                      <span className="feature-text-modern">{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              
+              <div className="cta-section-modern">
+                <button 
+                  className={`cta-button-modern ${userType.highlight ? 'primary' : 'secondary'}`}
+                  onClick={() => handleButtonClick(userType.id)}
+                  data-testid={`${userType.id}-btn`}
+                >
+                  {userType.cta}
+                </button>
+              </div>
             </div>
           ))}
         </div>
         
-        <div className="user-types-note">
+        {/* Bottom Note */}
+        <div className="bottom-note-modern">
           <p>
-            <strong>Note:</strong> All plans include direct access to IIT Kanpur mentors, 
-            personalized guidance, and our proven methodology that has helped students achieve their IIT dreams.
+            <strong>🎓 Expert Guidance:</strong> All our mentors are IIT graduates with proven track records in JEE coaching and student success.
           </p>
         </div>
+        
       </div>
     </section>
   );

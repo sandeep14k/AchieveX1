@@ -1,0 +1,449 @@
+/* Trial Booking Page - Professional Dark Theme */
+
+.trial-booking {
+  min-height: 100vh;
+  /* Use a deep, dark slate background; not pure black to reduce eye strain */
+  background-color: #0f172a;
+  position: relative;
+  overflow-x: hidden;
+}
+
+.trial-booking-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 100px 32px 60px;
+  position: relative;
+  z-index: 2;
+}
+
+.trial-booking-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.trial-booking-title {
+  font-size: 3.25rem;
+  font-weight: 800;
+  color: #f8fafc; /* Use a bright, near-white for main headings */
+  margin-bottom: 24px;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.trial-booking-title .highlight {
+  background: linear-gradient(135deg, #818cf8, #a78bfa);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.trial-booking-subtitle {
+  font-size: 1.25rem;
+  color: #94a3b8; /* A softer, secondary light gray for subtitles */
+  max-width: 650px;
+  margin: 0 auto 20px;
+  line-height: 1.6;
+}
+
+.trial-booking-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  margin-bottom: 60px;
+}
+
+/* --- Card Styling --- */
+.session-details-card,
+.booking-form-card {
+  /* A lighter shade of dark for cards to create depth */
+  background: #1e293b; 
+  border-radius: 16px;
+  padding: 40px;
+  /* Subtle border for definition */
+  border: 1px solid #334155; 
+  /* Shadows on dark themes are subtle; they create ambient darkness */
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+}
+
+.session-details-card::before,
+.booking-form-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+}
+
+.session-details-card::before {
+  background: linear-gradient(90deg, #6366f1, #8b5cf6);
+}
+
+.booking-form-card::before {
+  background: linear-gradient(90deg, #22c55e, #16a34a);
+}
+
+/* --- Notification Styling --- */
+.notification {
+  padding: 16px 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  font-weight: 500;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-left: 4px solid;
+}
+
+.notification.success {
+  background-color: #1f2937;
+  color: #a7f3d0;
+  border-color: #34d399;
+}
+
+.notification.error {
+  background-color: #1f2937;
+  color: #fca5a5;
+  border-color: #f87171;
+}
+
+.notification-close {
+  background: none;
+  border: none;
+  color: #9ca3af;
+  font-size: 1.5rem;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.card-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.card-icon {
+  width: 72px;
+  height: 72px;
+  background: linear-gradient(135deg, #4f46e5, #7c3aed);
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.75rem;
+  margin: 0 auto 20px;
+  color: #e0e7ff;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+}
+
+.booking-form-card .card-icon {
+  background: linear-gradient(135deg, #16a34a, #22c55e);
+}
+
+.card-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #f1f5f9;
+  margin-bottom: 12px;
+}
+
+.card-subtitle {
+  font-size: 1rem;
+  color: #94a3b8;
+  line-height: 1.6;
+}
+
+.benefits-list {
+  list-style: none;
+  padding: 0;
+  margin: 20px 0;
+}
+
+.benefits-list li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+  font-size: 1rem;
+  color: #cbd5e1; /* Brighter text for list items */
+}
+
+.benefits-list li .checkmark {
+  color: #4ade80; /* Brighter green for better visibility */
+  font-weight: 700;
+  font-size: 1.2rem;
+}
+
+.session-meta {
+  background: #0f172a; /* Inset look using the main bg color */
+  border-radius: 12px;
+  padding: 24px;
+  margin: 24px 0;
+  border: 1px solid #334155;
+}
+
+.session-meta h4 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #f1f5f9;
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.meta-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.meta-item .label {
+  font-size: 0.8rem;
+  color: #94a3b8;
+  font-weight: 500;
+  margin-bottom: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.meta-item .value {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #f1f5f9;
+}
+
+.price-highlight {
+  text-align: center;
+  margin: 24px 0;
+}
+
+.price-tag {
+  display: inline-block;
+  padding: 14px 28px;
+  /* Use the accent color to make the price pop */
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  color: white;
+  border-radius: 50px;
+  font-size: 1.5rem;
+  font-weight: 700;
+  box-shadow: 0 8px 25px rgba(99, 102, 241, 0.2);
+}
+
+.price-tag::after {
+  /* Same styling, works well on dark themes */
+  content: 'Limited Time Offer';
+  position: absolute;
+  top: -10px;
+  right: -12px;
+  background: #f59e0b;
+  color: white;
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 4px 8px;
+  border-radius: 8px;
+  text-transform: uppercase;
+}
+
+
+/* --- Booking Form --- (KEY IMPROVEMENTS HERE) --- */
+.booking-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-label {
+  font-weight: 600;
+  color: #cbd5e1; /* Bright label color */
+  font-size: 0.95rem;
+}
+
+.form-input,
+.form-select {
+  padding: 14px 16px;
+  border: 1px solid #475569; /* Clear but not distracting border */
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+  background-color: #0f172a; /* Inset background */
+  color: #f8fafc; /* Bright text for user input */
+}
+
+/* CRITICAL: Style the placeholder text for dark theme */
+.form-input::placeholder {
+  color: #64748b; /* Muted but readable placeholder */
+  opacity: 1;
+}
+
+.form-input:focus,
+.form-select:focus {
+  outline: none;
+  border-color: #818cf8; /* Bright purple focus border */
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.4); /* Glowing focus ring */
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.booking-button {
+  padding: 18px 32px;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 1.125rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 16px;
+}
+
+.booking-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(99, 102, 241, 0.3);
+}
+
+.booking-button:disabled {
+  background: #334155;
+  color: #64748b;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.payment-processing {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  font-weight: 600;
+}
+
+.spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  border-top-color: white;
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Payment Info Section */
+.payment-info {
+  background: #1e293b;
+  border: 1px solid #334155;
+  border-radius: 16px;
+  padding: 24px;
+  margin-top: 32px;
+}
+
+.payment-info h4 {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #a5f3fc; /* Cyan text for info sections */
+  margin-bottom: 12px;
+  text-align: center;
+}
+
+.payment-features {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.payment-feature {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+  color: #7dd3fc;
+}
+
+.payment-feature .icon {
+  color: #67e8f9;
+}
+
+/* --- Trust Section --- */
+.trust-section {
+  margin-top: 80px;
+  text-align: center;
+}
+
+.trust-section h3 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #f1f5f9;
+  margin-bottom: 40px;
+}
+
+.trust-indicators {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+.trust-indicator {
+  background: #1e293b;
+  border-radius: 16px;
+  padding: 30px 20px;
+  border: 1px solid #334155;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+}
+
+.trust-indicator .icon {
+  font-size: 2.5rem;
+  margin-bottom: 16px;
+}
+
+.trust-indicator h4 {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #f1f5f9;
+  margin-bottom: 8px;
+}
+
+.trust-indicator p {
+  font-size: 0.95rem;
+  color: #94a3b8;
+  line-height: 1.6;
+}
+
+/* --- Responsive Design --- */
+@media (max-width: 1024px) {
+  .trial-booking-grid,
+  .trust-indicators {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  .trial-booking-container {
+    padding: 80px 20px 40px;
+  }
+  .trial-booking-title { font-size: 2.5rem; }
+  .trial-booking-subtitle { font-size: 1.125rem; }
+  .session-details-card,
+  .booking-form-card { padding: 32px 24px; }
+  .form-row { grid-template-columns: 1fr; gap: 20px; }
+  .meta-grid,
+  .payment-features { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 480px) {
+  .trial-booking-title { font-size: 2.1rem; }
+  .price-tag { font-size: 1.25rem; padding: 12px 24px; }
+}

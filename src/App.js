@@ -9,6 +9,7 @@ import Dashboard from './pages/Dashboard';
 import ForgotPassword from './pages/ForgotPassword';
 import Onboarding from './pages/Onboarding';
 import TrialBooking from './pages/TrialBooking';
+import PaymentSuccess from './pages/PaymentSuccess';
 import Enrollment from './pages/Enrollment';
 import MentorApplication from './pages/MentorApplication';
 import Unauthorized from './pages/Unauthorized';
@@ -26,6 +27,7 @@ function App() {
             <Route path="/signup" element={<Signup />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
             <Route path="/mentor-application" element={<MentorApplication />} />
+            <Route path="/payment-success" element={<PaymentSuccess />} />
             <Route path="/unauthorized" element={<Unauthorized />} />
             
             {/* Protected Routes */}
@@ -51,7 +53,7 @@ function App() {
                 <ProtectedRoute>
                   <TrialBooking />
                 </ProtectedRoute>
-              } 
+              }
             />
             <Route 
               path="/enroll" 

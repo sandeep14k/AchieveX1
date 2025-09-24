@@ -7,91 +7,73 @@ const XFactor = () => {
       <div className="x-factor-container">
         <div className="x-factor-header">
           <h2 className="x-factor-title">
-            What Makes AchieveX <span className="highlight">Different?</span>
+            Our 3 <span className="highlight">X-Factors</span>
           </h2>
           <p className="x-factor-subtitle">
-            Our X-Factor: Direct access to IIT Kanpur mentors with a personalized, 
-            result-driven approach that guarantees your success.
+            Why AchieveX students crack JEE with 60% effort while others struggle with 100%? 
+            These three game-changing strategies make all the difference.
           </p>
         </div>
 
         <div className="x-factor-grid">
-          <div className="x-factor-card primary">
+          <div className="x-factor-card primary" data-testid="personalized-syllabus">
             <div className="card-icon">
               <div className="icon-circle">🎯</div>
             </div>
-            <h3>Direct IIT Kanpur Connection</h3>
-            <p>
-              Unlike coaching centers with thousands of students, get 1-on-1 guidance 
-              from actual IIT Kanpur alumni who understand your journey.
+            <div className="card-number">1</div>
+            <h3>Personalized Syllabus</h3>
+            <p className="card-tagline">
+              Focus on your strengths & weaknesses. <br/>
+              <strong>Why do 100% when 60% gives you 99%ile?</strong>
             </p>
-            <div className="card-highlight">10+ IIT Kanpur Mentors</div>
+            <p>
+              Skip what you already know. Master what you don't. Our AI-powered analysis 
+              creates a study plan that targets your exact weak spots, eliminating 
+              wasted time on topics you've already conquered.
+            </p>
+            <div className="card-highlight">Smart Study, Not Hard Study</div>
           </div>
 
-          <div className="x-factor-card">
+          <div className="x-factor-card secondary" data-testid="curated-questions">
             <div className="card-icon">
-              <div className="icon-circle">📊</div>
+              <div className="icon-circle">💎</div>
             </div>
-            <h3>AI-Powered Test Analysis</h3>
-            <p>
-              Upload your tests and get detailed analysis with personalized improvement 
-              strategies. Know exactly what to study next.
+            <div className="card-number">2</div>
+            <h3 className='card-heading2'>Curated Questions</h3>
+            <p className="card-tagline">
+              Handpicked by IITians from JEE PYQs and standard reference books. <br/>
+              <strong>Quality over quantity.</strong>
             </p>
-            <div className="card-highlight">Real-time Feedback</div>
+            <p>
+              Why solve 1000 random problems when 100 carefully selected ones can 
+              teach you everything? Our IIT mentors hand-pick questions that cover 
+              maximum concepts with minimum effort.
+            </p>
+            <div className="card-highlight">500+ Premium Questions</div>
           </div>
 
-          <div className="x-factor-card">
-            <div className="card-icon">
-              <div className="icon-circle">💡</div>
-            </div>
-            <h3>Personalized Study Plans</h3>
-            <p>
-              No generic courses. Every plan is crafted based on your strengths, 
-              weaknesses, and target college preferences.
-            </p>
-            <div className="card-highlight">100% Customized</div>
-          </div>
-
-          <div className="x-factor-card">
+          <div className="x-factor-card accent" data-testid="sar-pe-danda">
             <div className="card-icon">
               <div className="icon-circle">⚡</div>
             </div>
-            <h3>Real-time Mentorship</h3>
-            <p>
-              Stuck on a problem at 11 PM? Chat directly with your mentor for 
-              instant help and motivation when you need it most.
+            <div className="card-number">3</div>
+            <h3>"Sar Pe Danda" Effect</h3>
+            <p className="card-tagline">
+              Daily tasks, weekly checks, and strict accountability. <br/>
+              <strong>Build discipline with IITian mentors.</strong>
             </p>
-            <div className="card-highlight">24/7 Support</div>
-          </div>
-
-          <div className="x-factor-card">
-            <div className="card-icon">
-              <div className="icon-circle">🏆</div>
-            </div>
-            <h3>Guaranteed Results</h3>
             <p>
-              If enrolled, your seat in IIT/NIT is fixed. We're so confident in our 
-              approach that we guarantee your success.
+              No more procrastination. Your personal IIT mentor ensures you complete 
+              daily targets, tracks your progress weekly, and keeps you accountable 
+              every step of the way. Discipline is the key to success.
             </p>
-            <div className="card-highlight">IIT/NIT Guarantee</div>
-          </div>
-
-          <div className="x-factor-card">
-            <div className="card-icon">
-              <div className="icon-circle">💰</div>
-            </div>
-            <h3>Try Before You Commit</h3>
-            <p>
-              Start with just ₹19 trial session. Experience our mentorship quality 
-              before making any major investment.
-            </p>
-            <div className="card-highlight">₹19 Trial</div>
+            <div className="card-highlight">Daily Accountability</div>
           </div>
         </div>
 
         <div className="x-factor-bottom">
           <div className="comparison-highlight">
-            <h4>Why Choose AchieveX Over Traditional Coaching?</h4>
+            <h4>The AchieveX Advantage vs Traditional Coaching</h4>
             <div className="comparison-grid">
               <div className="comparison-item">
                 <span className="comparison-label">Traditional Coaching</span>
@@ -99,25 +81,40 @@ const XFactor = () => {
                 <span className="comparison-label achievex">AchieveX</span>
               </div>
               <div className="comparison-row">
-                <span>1 teacher : 100+ students</span>
-                <span>⚔️</span>
-                <span>1 mentor : 1 student</span>
+                <span>Study entire syllabus blindly</span>
+                <span>⚡</span>
+                <span>Focus only on your weak areas</span>
               </div>
               <div className="comparison-row">
-                <span>Generic study material</span>
-                <span>⚔️</span>
-                <span>Personalized plans</span>
+                <span>Thousands of random questions</span>
+                <span>⚡</span>
+                <span>Curated questions by IITians</span>
               </div>
               <div className="comparison-row">
-                <span>Fixed batch timings</span>
-                <span>⚔️</span>
-                <span>Flexible scheduling</span>
+                <span>No accountability after class</span>
+                <span>⚡</span>
+                <span>Daily tasks & strict monitoring</span>
               </div>
               <div className="comparison-row">
-                <span>Expensive fees upfront</span>
-                <span>⚔️</span>
-                <span>Start with ₹19 trial</span>
+                <span>Same approach for everyone</span>
+                <span>⚡</span>
+                <span>Personalized strategy for each student</span>
               </div>
+            </div>
+          </div>
+          
+          <div className="stats-showcase">
+            <div className="stat-item">
+              <div className="stat-number">60%</div>
+              <div className="stat-label">Study Time Reduction</div>
+            </div>
+            <div className="stat-item">
+              <div className="stat-number">99%ile</div>
+              <div className="stat-label">Target Achievement</div>
+            </div>
+            <div className="stat-item">
+              <div className="stat-number">100%</div>
+              <div className="stat-label">Daily Accountability</div>
             </div>
           </div>
         </div>
