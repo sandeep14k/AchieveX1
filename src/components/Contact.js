@@ -64,7 +64,7 @@ const Contact = () => {
                 <div className="method-icon">📞</div>
                 <div>
                   <h4>Phone</h4>
-                  <p>+91 98765 43210</p>
+                  <p>+91 8851607038</p>
                 </div>
               </div>
               
@@ -72,7 +72,7 @@ const Contact = () => {
                 <div className="method-icon">📧</div>
                 <div>
                   <h4>Email</h4>
-                  <p>hello@achievex.com</p>
+                  <p>achievex.work@gmail.com</p>
                 </div>
               </div>
               
@@ -80,7 +80,7 @@ const Contact = () => {
                 <div className="method-icon">📍</div>
                 <div>
                   <h4>Office</h4>
-                  <p>Delhi, Mumbai, Bangalore</p>
+                  <p>Kanpur</p>
                 </div>
               </div>
               

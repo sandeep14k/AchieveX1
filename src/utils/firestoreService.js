@@ -143,6 +143,41 @@ class FirestoreService {
     }
   }
 
+  // --- NEW FUNCTION TO ADD ---
+  // This function is specifically for the PaymentSuccess page
+  async updateBookingOnSuccess(orderId, paymentDetails) {
+    try {
+      // We use getBookingByOrderId to find the document's actual ID
+      const bookingDoc = await this.getBookingByOrderId(orderId);
+      if (!bookingDoc.success) {
+        throw new Error("Booking not found for the given order ID.");
+      }
+
+      const bookingRef = doc(db, this.bookingsCollection, bookingDoc.booking.id);
+      
+      const updateData = {
+        paymentId: paymentDetails.paymentId,
+        paymentStatus: 'success',
+        sessionStatus: 'confirmed',
+        paymentMethod: paymentDetails.paymentMethod || 'PayU',
+        paidAt: serverTimestamp(),
+        updatedAt: serverTimestamp()
+      };
+
+      await updateDoc(bookingRef, updateData);
+      
+      console.log('Booking updated to success:', bookingDoc.booking.id);
+      
+      // Return the full booking data for the success page to display
+      return await this.getBookingById(bookingDoc.booking.id);
+
+    } catch (error) {
+      console.error('Error updating booking on success:', error);
+      throw new Error(`Failed to update booking on success: ${error.message}`);
+    }
+  }
+  // --- END OF NEW FUNCTION ---
+
   // Get booking by order ID
   async getBookingByOrderId(orderId) {
     try {
@@ -154,7 +189,8 @@ class FirestoreService {
       const querySnapshot = await getDocs(q);
       
       if (querySnapshot.empty) {
-        throw new Error('Booking not found');
+        // Return a clear failure state instead of throwing an error
+        return { success: false, booking: null };
       }
       
       const doc = querySnapshot.docs[0];

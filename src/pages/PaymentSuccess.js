@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import CashfreePayments from '../utils/cashfree';
+import FirestoreService from '../utils/firestoreService'; // Correctly import your Firestore service
 import './PaymentSuccess.css';
 
 const PaymentSuccess = () => {
@@ -8,33 +8,42 @@ const PaymentSuccess = () => {
   const [searchParams] = useSearchParams();
   const [bookingData, setBookingData] = useState(null);
   const [isVerifying, setIsVerifying] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    const verifyPayment = async () => {
-      try {
-        const orderId = searchParams.get('order_id');
-        const status = searchParams.get('status');
-        
-        if (status === 'SUCCESS' && orderId) {
-          // Verify payment with Cashfree
-          const verification = await CashfreePayments.verifyPayment(orderId);
+    const confirmPayment = async () => {
+      // PayU sends back many parameters. We primarily need the transaction ID ('txnid').
+      const txnid = searchParams.get('txnid');
+      const status = searchParams.get('status');
+      const paymentId = searchParams.get('mihpayid'); // This is the PayU payment ID
+
+      if (status === 'success' && txnid) {
+        try {
+          // Update the booking in Firestore from 'pending' to 'success'
+          const paymentDetails = {
+            paymentId: paymentId,
+            paymentMethod: 'PayU',
+          };
+          const updatedBookingResult = await FirestoreService.updateBookingOnSuccess(txnid, paymentDetails);
           
-          if (verification.success) {
-            // Get booking data from localStorage (in production, fetch from backend)
-            const storedBooking = localStorage.getItem('lastBooking');
-            if (storedBooking) {
-              setBookingData(JSON.parse(storedBooking));
-            }
+          if (updatedBookingResult.success) {
+            setBookingData(updatedBookingResult.booking);
+          } else {
+            setError("Could not find or update your booking details.");
           }
+        } catch (err) {
+          console.error('Payment confirmation error:', err);
+          setError(err.message);
         }
-      } catch (error) {
-        console.error('Payment verification error:', error);
-      } finally {
-        setIsVerifying(false);
+      } else {
+        // This case handles if someone lands on the page without correct parameters
+        setError("Invalid payment confirmation link.");
       }
+      
+      setIsVerifying(false);
     };
 
-    verifyPayment();
+    confirmPayment();
   }, [searchParams]);
 
   const handleGoToDashboard = () => {
@@ -59,14 +68,14 @@ const PaymentSuccess = () => {
     );
   }
 
-  if (!bookingData) {
+  if (error || !bookingData) {
     return (
       <div className="payment-success">
         <div className="payment-success-container">
           <div className="error-state">
             <div className="error-icon">❌</div>
             <h2>Payment Verification Failed</h2>
-            <p>We couldn't verify your payment. Please contact support.</p>
+            <p>{error || "We couldn't verify your payment. Please contact support."}</p>
             <button onClick={handleGoToDashboard} className="btn-primary">
               Go to Dashboard
             </button>
@@ -76,21 +85,25 @@ const PaymentSuccess = () => {
     );
   }
 
+  // Format the date for display
+  const formattedDate = bookingData.sessionDate 
+    ? new Date(bookingData.sessionDate).toLocaleDateString('en-IN', {
+        weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
+      })
+    : 'Not selected';
+
   return (
     <div className="payment-success">
       <div className="payment-success-container">
         
-        {/* Success Header */}
         <div className="success-header">
           <div className="success-icon">🎉</div>
           <h1>Payment Successful!</h1>
           <p>Your trial session has been booked successfully.</p>
         </div>
 
-        {/* Booking Details Card */}
         <div className="booking-details-card">
           <h3>📋 Booking Confirmation</h3>
-          
           <div className="detail-grid">
             <div className="detail-item">
               <span className="label">Booking ID</span>
@@ -106,11 +119,7 @@ const PaymentSuccess = () => {
             </div>
             <div className="detail-item">
               <span className="label">Session Date</span>
-              <span className="value">{bookingData.sessionDetails?.date}</span>
-            </div>
-            <div className="detail-item">
-              <span className="label">Session Time</span>
-              <span className="value">{bookingData.sessionDetails?.timeSlot}</span>
+              <span className="value">{formattedDate}</span>
             </div>
             <div className="detail-item">
               <span className="label">Status</span>
@@ -119,54 +128,22 @@ const PaymentSuccess = () => {
           </div>
         </div>
 
-        {/* Next Steps */}
         <div className="next-steps-card">
           <h3>📬 What happens next?</h3>
-          
           <div className="steps-list">
-            <div className="step-item">
-              <div className="step-number">1</div>
-              <div className="step-content">
-                <h4>Confirmation Email</h4>
-                <p>You'll receive a confirmation email with Google Meet link within 5 minutes.</p>
-              </div>
-            </div>
-            
-            <div className="step-item">
-              <div className="step-number">2</div>
-              <div className="step-content">
-                <h4>Mentor Assignment</h4>
-                <p>An IIT Kanpur mentor will be assigned and will contact you before the session.</p>
-              </div>
-            </div>
-            
-            <div className="step-item">
-              <div className="step-number">3</div>
-              <div className="step-content">
-                <h4>Session Reminder</h4>
-                <p>We'll send you a reminder 1 hour and 10 minutes before your session.</p>
-              </div>
-            </div>
+            <div className="step-item"><div className="step-number">1</div><div className="step-content"><h4>Confirmation Email</h4><p>You'll receive a confirmation email with a Google Meet link within 5 minutes.</p></div></div>
+            <div className="step-item"><div className="step-number">2</div><div className="step-content"><h4>Mentor Assignment</h4><p>An IIT Kanpur mentor will be assigned and will contact you before the session.</p></div></div>
+            <div className="step-item"><div className="step-number">3</div><div className="step-content"><h4>Session Reminder</h4><p>We'll send you a reminder before your session.</p></div></div>
           </div>
         </div>
 
-        {/* Action Buttons */}
         <div className="action-buttons">
-          <button onClick={handleGoToDashboard} className="btn-primary">
-            Go to Dashboard
-          </button>
-          <button onClick={handleBookAnother} className="btn-secondary">
-            Book Another Session
-          </button>
+          <button onClick={handleGoToDashboard} className="btn-primary">Go to Dashboard</button>
+          <button onClick={handleBookAnother} className="btn-secondary">Book Another Session</button>
         </div>
 
-        {/* Support Info */}
         <div className="support-info">
-          <p>
-            <strong>Need help?</strong> Contact us at{' '}
-            <a href="mailto:support@achievex.in">support@achievex.in</a> or{' '}
-            <a href="tel:+919876543210">+91 98765 43210</a>
-          </p>
+          <p><strong>Need help?</strong> Contact us at <a href="mailto:support@achievex.in">support@achievex.in</a></p>
         </div>
       </div>
     </div>

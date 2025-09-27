@@ -59,15 +59,15 @@ const Footer = () => {
             <div className="contact-info">
               <p className="contact-item">
                 <span className="contact-icon">📞</span>
-                +91 98765 43210
+                +91 8851607038
               </p>
               <p className="contact-item">
                 <span className="contact-icon">📧</span>
-                hello@achievex.com
+                achievex.work@gmail.com
               </p>
               <p className="contact-item">
                 <span className="contact-icon">📍</span>
-                Delhi, Mumbai, Bangalore
+                Kanpur
               </p>
             </div>
           </div>

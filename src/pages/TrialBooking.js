@@ -1,10 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
-import CashfreePayments from '../utils/cashfree';
+import { initiatePayuPayment } from '../utils/payuService'; // Import the PayU service
 import './TrialBooking.css';
 
 const TrialBooking = () => {
   const { userProfile } = useAuth();
+  const location = useLocation();
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     fullName: userProfile?.displayName || '',
     email: userProfile?.email || '',
@@ -16,7 +20,20 @@ const TrialBooking = () => {
   const [isProcessing, setIsProcessing] = useState(false);
   const [notification, setNotification] = useState({ type: '', message: '' });
   
-  // Generate available dates (next 7 days, excluding Sundays)
+  // This effect checks the URL for a failure message when PayU redirects back
+  useEffect(() => {
+    const queryParams = new URLSearchParams(location.search);
+    if (queryParams.get('payment') === 'failed') {
+      setNotification({
+        type: 'error',
+        message: '❌ Payment failed or was cancelled. Please try again.',
+      });
+      // Clean up the URL so the message doesn't persist on refresh
+      navigate('/trial-booking', { replace: true });
+    }
+  }, [location, navigate]);
+
+  // Generate available dates (next 10 days, excluding Sundays)
   const generateAvailableDates = () => {
     const dates = [];
     const today = new Date();
@@ -52,65 +69,7 @@ const TrialBooking = () => {
     }));
   };
 
-  const initiateCashfreePayment = async () => {
-    try {
-      setIsProcessing(true);
-      setNotification({ type: '', message: '' }); // Clear previous notifications
-
-      // Prepare payment data
-      const paymentData = {
-        amount: 19,
-        customerName: formData.fullName,
-        customerEmail: formData.email,
-        customerPhone: formData.phone,
-        note: 'AchieveX Trial Session - JEE Mentorship',
-        sessionData: {
-          date: formData.selectedDate,
-          grade: formData.grade,
-          goals: formData.goals
-        }
-      };
-
-      // Initialize payment using Cashfree utility
-      const paymentResult = await CashfreePayments.initializePayment(paymentData);
-
-      if (paymentResult.success) {
-        // Handle successful payment
-        setNotification({
-          type: 'success',
-          message: `🎉 Payment Successful! Your booking ID is ${paymentResult.bookingId}. You will receive a confirmation email shortly.`
-        });
-        
-        // Reset form
-        setFormData(prev => ({
-          ...prev,
-          phone: '',
-          grade: '',
-          selectedDate: '',          
-          goals: ''
-        }));
-        
-      } else {
-        // Handle payment failure
-        const errorMessage = paymentResult.error?.message || 'Payment failed or was cancelled by user.';
-        setNotification({
-          type: 'error',
-          message: `❌ Payment Failed: ${errorMessage} Please try again or contact support.`
-        });
-      }
-      
-    } catch (error) {
-      console.error('Payment error:', error);
-      setNotification({
-        type: 'error',
-        message: 'Something went wrong with the payment. Please try again or contact support.'
-      });
-    } finally {
-      setIsProcessing(false);
-    }
-  };
-
-  const handleSubmit = (e) => {
+  const handleBookingSubmit = async (e) => {
     e.preventDefault();
     
     // Validation
@@ -122,7 +81,32 @@ const TrialBooking = () => {
       return;
     }
 
-    initiateCashfreePayment();
+    setIsProcessing(true);
+    setNotification({ type: '', message: '' });
+
+    const paymentData = {
+      amount: 19.0, // PayU requires amount as a float or string
+      fullName: formData.fullName,
+      email: formData.email,
+      phone: formData.phone,
+      grade: formData.grade,
+      selectedDate: formData.selectedDate,
+      goals: formData.goals,
+    };
+
+    try {
+      // This will redirect the user to the PayU payment page
+      await initiatePayuPayment(paymentData);
+      // If the redirect is successful, the user is navigated away, 
+      // so code below this line won't execute.
+    } catch (error) {
+      console.error('PayU process failed:', error);
+      setNotification({
+        type: 'error',
+        message: `❌ Error: ${error.message || 'Could not initiate payment.'}`,
+      });
+      setIsProcessing(false); // Only stop processing if an error occurs before redirect
+    }
   };
 
   return (
@@ -188,7 +172,7 @@ const TrialBooking = () => {
             </div>
 
             <div className="payment-info">
-              <h4>🔒 Secure Payment via Cashfree</h4>
+              <h4>🔒 Secure Payment via PayU</h4>
               <div className="payment-features">
                 <div className="payment-feature">
                   <span className="icon">💳</span>
@@ -230,7 +214,7 @@ const TrialBooking = () => {
               </div>
             )}
 
-            <form className="booking-form" onSubmit={handleSubmit}>
+            <form className="booking-form" onSubmit={handleBookingSubmit}>
               <div className="form-group">
                 <label htmlFor="fullName" className="form-label">Full Name *</label>
                 <input
@@ -332,10 +316,10 @@ const TrialBooking = () => {
                 {isProcessing ? (
                   <div className="payment-processing">
                     <div className="spinner"></div>
-                    Processing Payment...
+                    Processing...
                   </div>
                 ) : (
-                  `Book Session - Pay ₹19 via Cashfree`
+                  `Book Session - Pay ₹19 via PayU`
                 )}
               </button>
             </form>
